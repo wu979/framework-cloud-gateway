@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.framework.cloud</groupId>
+        <artifactId>framework-cloud-gateway</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>framework-cloud-gateway-domain</artifactId>
+    <version>1.0.0</version>
+    <name>framework-cloud-gateway-domain</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>framework-cloud-gateway-common</artifactId>
+            <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>feign-framework-cloud-starter</artifactId>
+            <version>${feign.framework.cloud.starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>swagger-framework-cloud-starter</artifactId>
+            <version>${swagger.framework.cloud.starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>core-framework-cloud-starter</artifactId>
+            <version>${core.framework.cloud.starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>cache-framework-cloud-starter</artifactId>
+            <version>${cache.framework.cloud.starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>framework-cloud-platform-common</artifactId>
+            <version>${framework.cloud.platform.common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>framework-cloud-oauth-common</artifactId>
+            <version>${framework.cloud.oauth.common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-resource-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
+        </dependency>
+    </dependencies>
+</project>

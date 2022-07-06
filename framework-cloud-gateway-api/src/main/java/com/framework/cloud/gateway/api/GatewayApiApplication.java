@@ -1,13 +1,13 @@
-package com.framework.cloud.gateway;
+package com.framework.cloud.gateway.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GatewayApplication {
+public class GatewayApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GatewayApplication.class, args);
+        SpringApplication.run(GatewayApiApplication.class, args);
     }
 
 }

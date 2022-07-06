@@ -1,0 +1,37 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 139.155.11.84:8848
+        namespace: 198dda27-edd0-4fa6-8c50-983864062b8e
+        group: BASIC
+        heart-beat-timeout: 20000
+      config:
+        server-addr: 139.155.11.84:8848
+        namespace: 198dda27-edd0-4fa6-8c50-983864062b8e
+        #指定名称
+        name: framework-cloud-gateway
+        #分组
+        group: BASIC
+        #配置格式
+        file-extension: yml
+        #监听刷新
+        refresh-enabled: true
+        #超时时间（单位：毫秒）
+        timeout: 20000
+        #长轮询的重试次数 默认3
+        max-retry: 3
+        #长轮询任务重试时间（单位：毫秒）
+        config-retry-time: 20000
+        #长轮询的超时时间（单位：毫秒）
+        config-long-poll-timeout: 20000
+        #配置
+        shared-configs:
+          - {"dataId" : application.yml, "group" : COMMON, "refresh" : true}
+          - {"dataId" : feign.yml, "group" : COMMON, "refresh" : true}
+          - {"dataId" : swagger.yml, "group" : COMMON, "refresh" : true}
+          - {"dataId" : cache.yml, "group" : COMMON, "refresh" : true}

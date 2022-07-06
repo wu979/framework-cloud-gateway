@@ -10,96 +10,32 @@
     <description>网关</description>
     <packaging>jar</packaging>
 
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+    <modules>
+        <module>framework-cloud-gateway-api</module>
+        <module>framework-cloud-gateway-common</module>
+        <module>framework-cloud-gateway-domain</module>
+        <module>framework-cloud-gateway-infrastructure</module>
+    </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.framework.cloud</groupId>
-            <artifactId>dependencies-framework-cloud-starter</artifactId>
-            <version>${version}</version>
-        </dependency>
-    </dependencies>
+    <properties>
+        <common.framework.cloud.starter.version>1.0.0</common.framework.cloud.starter.version>
+        <feign.framework.cloud.starter.version>1.0.0</feign.framework.cloud.starter.version>
+        <swagger.framework.cloud.starter.version>1.0.0</swagger.framework.cloud.starter.version>
+        <cache.framework.cloud.starter.version>1.0.0</cache.framework.cloud.starter.version>
+        <core.framework.cloud.starter.version>1.0.0</core.framework.cloud.starter.version>
+        <framework.cloud.platform.common.version>1.0.0</framework.cloud.platform.common.version>
+        <framework.cloud.oauth.common.version>1.0.0</framework.cloud.oauth.common.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.framework.cloud</groupId>
                 <artifactId>pom-framework-cloud-starter</artifactId>
-                <version>${version}</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <finalName>${project.artifactId}</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>*.yml</include>
-                    <include>*.properties</include>
-                    <include>mapper/*.xml</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>com.framework.cloud.gateway.GatewayApplication</mainClass>
-                    <layout>ZIP</layout>
-                    <includeSystemScope>true</includeSystemScope>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- 资源插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <!-- 配置编译插件-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>UTF-8</encoding>
-                    <compilerArgs>
-                        <compilerArg>
-                            -Amapstruct.defaultComponentModel=spring
-                        </compilerArg>
-                    </compilerArgs>
-                </configuration>
-            </plugin>
-            <!-- 跳过单元测试 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
