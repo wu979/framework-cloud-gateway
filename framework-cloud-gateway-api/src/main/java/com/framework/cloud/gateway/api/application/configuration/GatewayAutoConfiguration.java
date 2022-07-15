@@ -1,20 +1,17 @@
 package com.framework.cloud.gateway.api.application.configuration;
 
-import lombok.AllArgsConstructor;
+import com.framework.cloud.core.ApplicationConfiguration;
+import com.framework.cloud.core.HttpMessageConfiguration;
+import com.framework.cloud.core.ObjectMapperConfiguration;
+import org.springframework.context.annotation.Import;
 
 /**
  *
  *
  * @author wusiwei
  */
-@AllArgsConstructor
+@Import({ApplicationConfiguration.class, ObjectMapperConfiguration.class, HttpMessageConfiguration.class})
 public class GatewayAutoConfiguration {
 
-    //private final RedisTemplate<Object, Object> redisTemplate;
-    //
-    //@Bean
-    //public RouteDefinitionRepository routeDefinitionRepository() {
-    //    return new CacheRouteDefinitionRepository(redisTemplate);
-    //}
 
 }

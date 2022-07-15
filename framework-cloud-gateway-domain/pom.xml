@@ -27,8 +27,8 @@
         </dependency>
         <dependency>
             <groupId>com.framework.cloud</groupId>
-            <artifactId>swagger-framework-cloud-starter</artifactId>
-            <version>${swagger.framework.cloud.starter.version}</version>
+            <artifactId>cache-framework-cloud-starter</artifactId>
+            <version>${cache.framework.cloud.starter.version}</version>
         </dependency>
         <dependency>
             <groupId>com.framework.cloud</groupId>
@@ -36,19 +36,12 @@
             <version>${core.framework.cloud.starter.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.framework.cloud</groupId>
-            <artifactId>cache-framework-cloud-starter</artifactId>
-            <version>${cache.framework.cloud.starter.version}</version>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.framework.cloud</groupId>
-            <artifactId>framework-cloud-platform-common</artifactId>
-            <version>${framework.cloud.platform.common.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.framework.cloud</groupId>
-            <artifactId>framework-cloud-oauth-common</artifactId>
-            <version>${framework.cloud.oauth.common.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>

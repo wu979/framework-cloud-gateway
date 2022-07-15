@@ -33,5 +33,4 @@ spring:
         shared-configs:
           - {"dataId" : application.yml, "group" : COMMON, "refresh" : true}
           - {"dataId" : feign.yml, "group" : COMMON, "refresh" : true}
-          - {"dataId" : swagger.yml, "group" : COMMON, "refresh" : true}
           - {"dataId" : cache.yml, "group" : COMMON, "refresh" : true}

@@ -8,7 +8,7 @@
     <version>1.0.0</version>
     <name>framework-cloud-gateway</name>
     <description>网关</description>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <modules>
         <module>framework-cloud-gateway-api</module>
@@ -20,11 +20,8 @@
     <properties>
         <common.framework.cloud.starter.version>1.0.0</common.framework.cloud.starter.version>
         <feign.framework.cloud.starter.version>1.0.0</feign.framework.cloud.starter.version>
-        <swagger.framework.cloud.starter.version>1.0.0</swagger.framework.cloud.starter.version>
         <cache.framework.cloud.starter.version>1.0.0</cache.framework.cloud.starter.version>
         <core.framework.cloud.starter.version>1.0.0</core.framework.cloud.starter.version>
-        <framework.cloud.platform.common.version>1.0.0</framework.cloud.platform.common.version>
-        <framework.cloud.oauth.common.version>1.0.0</framework.cloud.oauth.common.version>
     </properties>
 
     <dependencyManagement>

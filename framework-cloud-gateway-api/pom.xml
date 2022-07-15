@@ -19,6 +19,12 @@
             <groupId>com.framework.cloud</groupId>
             <artifactId>framework-cloud-gateway-infrastructure</artifactId>
             <version>${version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
