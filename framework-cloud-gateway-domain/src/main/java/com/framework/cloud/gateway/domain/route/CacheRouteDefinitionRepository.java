@@ -1,5 +1,6 @@
 package com.framework.cloud.gateway.domain.route;
 
+import com.alibaba.ttl.internal.javassist.NotFoundException;
 import com.framework.cloud.gateway.common.constant.GatewayConstant;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
@@ -28,10 +29,7 @@ public class CacheRouteDefinitionRepository implements RouteDefinitionRepository
      */
     @Override
     public Flux<RouteDefinition> getRouteDefinitions() {
-        List<RouteDefinition> routeDefinitions = new ArrayList<>();
-        hashOperations.values(GatewayConstant.ROUTES).forEach(routeDefinition -> {
-            routeDefinitions.add(routeDefinition);
-        });
+        List<RouteDefinition> routeDefinitions = new ArrayList<>(hashOperations.values(GatewayConstant.ROUTES));
         return Flux.fromIterable(routeDefinitions);
     }
 
@@ -52,6 +50,12 @@ public class CacheRouteDefinitionRepository implements RouteDefinitionRepository
      */
     @Override
     public Mono<Void> delete(Mono<String> routeId) {
-        return null;
+        return routeId.flatMap(id -> {
+            if (hashOperations.hasKey(GatewayConstant.ROUTES, id)) {
+                hashOperations.delete(GatewayConstant.ROUTES, id);
+                return Mono.empty();
+            }
+            return Mono.defer(() -> Mono.error(new NotFoundException("路由文件没有找到: " + routeId)));
+        });
     }
 }

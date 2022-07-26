@@ -1,3 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.framework.cloud.gateway.api.application.configuration.GatewayAutoConfiguration
-
+com.framework.cloud.core.ObjectMapperConfiguration,\
+com.framework.cloud.core.ApplicationConfiguration,\
+com.framework.cloud.core.HttpMessageConfiguration,\
+com.framework.cloud.core.RestTemplateConfiguration

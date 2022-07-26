@@ -2,6 +2,7 @@ package com.framework.cloud.gateway.common.rpc.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -9,6 +10,7 @@ import lombok.Data;
  * @author wusiwei
  */
 @Data
+@NoArgsConstructor
 public class GatewayRouteListVO {
 
     @ApiModelProperty(value = "主键")
