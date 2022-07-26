@@ -23,11 +23,7 @@ public class RouteDefinitionUtil {
                 gatewayRoute.getPredicates(), gatewayRoute.getFilters(), gatewayRoute.getSort());
     }
 
-    private static RouteDefinition buildRouteDefinition(String serviceUrl,
-                                                        String serviceName,
-                                                        String predicates,
-                                                        String filters,
-                                                        Integer sort) {
+    private static RouteDefinition buildRouteDefinition(String serviceUrl, String serviceName, String predicates, String filters, Integer sort) {
         RouteDefinition definition = new RouteDefinition();
         URI uri ;
         if (serviceUrl.startsWith(HttpConstant.LB)) {
