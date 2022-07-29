@@ -12,7 +12,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum GatewayMsg {
 
-
     ;
 
     private final String msg;

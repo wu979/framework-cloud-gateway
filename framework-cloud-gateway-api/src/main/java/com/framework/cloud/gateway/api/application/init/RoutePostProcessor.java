@@ -28,14 +28,17 @@ import java.util.List;
  */
 @Slf4j
 @Component
-@AutoConfigureOrder(Integer.MIN_VALUE)
+@AutoConfigureOrder(GatewayConstant.LOAD_BALANCER_CLIENT_FILTER_ORDER + 100)
 public class RoutePostProcessor implements ApplicationListener<ApplicationInitializingEvent>, ApplicationEventPublisherAware {
 
     private ApplicationEventPublisher publisher;
+
     @Resource
     private RedisCache redisCache;
+
     @Resource
     private PlatformFeignService platformFeignService;
+
     @Qualifier("cacheRouteDefinitionRepository")
     @Resource
     private RouteDefinitionRepository routeDefinitionRepository;
