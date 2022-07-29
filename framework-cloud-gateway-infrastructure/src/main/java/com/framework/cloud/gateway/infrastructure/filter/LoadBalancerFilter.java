@@ -40,7 +40,6 @@ public class LoadBalancerFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        int i= 1 / 0 ;
         URI url = exchange.getAttribute(ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR);
         if (url == null) {
             return chain.filter(exchange);

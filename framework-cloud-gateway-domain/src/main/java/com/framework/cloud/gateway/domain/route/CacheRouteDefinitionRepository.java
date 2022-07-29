@@ -24,18 +24,12 @@ public class CacheRouteDefinitionRepository implements RouteDefinitionRepository
     @Resource
     private HashOperations<String, String, RouteDefinition> hashOperations;
 
-    /**
-     * get route
-     */
     @Override
     public Flux<RouteDefinition> getRouteDefinitions() {
         List<RouteDefinition> routeDefinitions = new ArrayList<>(hashOperations.values(GatewayConstant.ROUTES));
         return Flux.fromIterable(routeDefinitions);
     }
 
-    /**
-     * save route
-     */
     @Override
     public Mono<Void> save(Mono<RouteDefinition> route) {
         return route
@@ -45,9 +39,6 @@ public class CacheRouteDefinitionRepository implements RouteDefinitionRepository
                 });
     }
 
-    /**
-     * delete route
-     */
     @Override
     public Mono<Void> delete(Mono<String> routeId) {
         return routeId.flatMap(id -> {

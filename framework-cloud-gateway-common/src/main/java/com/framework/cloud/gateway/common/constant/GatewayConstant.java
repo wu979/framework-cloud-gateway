@@ -6,16 +6,6 @@ package com.framework.cloud.gateway.common.constant;
 public class GatewayConstant {
 
     /**
-     * 版本号
-     */
-    public static final String VERSION = "version";
-
-    /**
-     * 权重
-     */
-    public static final String WEIGHT = "weight";
-
-    /**
      * 网关动态路由
      */
     public static final String ROUTES = "gateway:routes";
@@ -23,7 +13,12 @@ public class GatewayConstant {
     /**
      * 网关前缀
      */
-    public static final String SERVER_LB = "lb";
+    public static final String SERVER_LB = "lb://";
+
+    /**
+     * Swagger分组
+     */
+    public static final String GROUP = "?group=";
 
     /**
      * 加载顺序

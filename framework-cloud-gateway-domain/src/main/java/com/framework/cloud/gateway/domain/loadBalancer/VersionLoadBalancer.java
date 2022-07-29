@@ -1,9 +1,9 @@
 package com.framework.cloud.gateway.domain.loadBalancer;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.framework.cloud.common.constant.NacosConstant;
 import com.framework.cloud.common.utils.WeightUtil;
 import com.framework.cloud.common.weight.WeightMeta;
-import com.framework.cloud.gateway.common.constant.GatewayConstant;
 import com.framework.cloud.gateway.domain.properties.GatewayProperties;
 import com.framework.cloud.gateway.domain.utils.LoadBalancerUtil;
 import lombok.AllArgsConstructor;
@@ -52,12 +52,12 @@ public class VersionLoadBalancer implements ReactorServiceInstanceLoadBalancer {
         }
         String version = gatewayProperties.getVersion();
         Map<String, String> versionMap = new HashMap<>(1);
-        versionMap.put(GatewayConstant.VERSION, version);
+        versionMap.put(NacosConstant.VERSION, version);
         Set<Map.Entry<String, String>> attributes = Collections.unmodifiableSet(versionMap.entrySet());
         Map<ServiceInstance, Integer> instancesList = instances.stream()
                 .filter(instance -> instance.getMetadata().entrySet().containsAll(attributes))
-                .filter(instance -> instance.getMetadata().containsKey(GatewayConstant.WEIGHT))
-                .collect(Collectors.toMap(Function.identity(), entry -> Integer.parseInt(entry.getMetadata().get(GatewayConstant.WEIGHT))));
+                .filter(instance -> instance.getMetadata().containsKey(NacosConstant.WEIGHT))
+                .collect(Collectors.toMap(Function.identity(), entry -> Integer.parseInt(entry.getMetadata().get(NacosConstant.WEIGHT))));
         WeightMeta<ServiceInstance> weightMeta = WeightUtil.randomWeightMeta(instancesList);
         if (ObjectUtil.isNull(weightMeta)) {
             return LoadBalancerUtil.empty(serviceId);
