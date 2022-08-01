@@ -71,6 +71,7 @@
                     <include>*.yml</include>
                     <include>*.properties</include>
                     <include>logback-spring.xml</include>
+                    <include>public-key.txt</include>
                     <include>META-INF/spring.factories</include>
                 </includes>
                 <filtering>true</filtering>

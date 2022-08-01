@@ -24,4 +24,14 @@ public class GatewayConstant {
      * 加载顺序
      */
     public static final int LOAD_BALANCER_CLIENT_FILTER_ORDER = 10001;
+
+    /**
+     * 权限
+     */
+    public static final String PERMISSION = "gateway:permission";
+
+    /**
+     * 角色
+     */
+    public static final String PERMISSION_ROLE = "gateway:roles";
 }

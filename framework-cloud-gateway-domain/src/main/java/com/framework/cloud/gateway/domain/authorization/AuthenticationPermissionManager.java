@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
  * @author wusiwei
  */
 @AllArgsConstructor
-public class AuthorizationPermissionManager implements ReactiveAuthorizationManager<AuthorizationContext> {
+public class AuthenticationPermissionManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
     private final PermissionFeature permissionFeature;
 

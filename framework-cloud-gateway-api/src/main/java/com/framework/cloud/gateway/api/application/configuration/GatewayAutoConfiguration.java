@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
  */
 @AllArgsConstructor
 @EnableConfigurationProperties(GatewayProperties.class)
-@ImportAutoConfiguration({ExceptionConfiguration.class})
+@ImportAutoConfiguration({ExceptionConfiguration.class, AuthenticationTokenConfiguration.class, AuthenticationResourceConfiguration.class})
 public class GatewayAutoConfiguration {
 
     private final GatewayProperties gatewayProperties;

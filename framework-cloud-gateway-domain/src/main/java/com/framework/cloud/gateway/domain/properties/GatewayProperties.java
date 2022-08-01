@@ -24,4 +24,5 @@ public class GatewayProperties {
      * 过滤路由
      */
     private String[] ignoredUrl;
+
 }
