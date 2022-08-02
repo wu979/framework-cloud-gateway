@@ -16,7 +16,7 @@ import java.util.List;
  * @author wusiwei
  */
 @AllArgsConstructor
-public class ExceptionConfiguration {
+public class GatewayExceptionConfiguration {
 
     private final List<ViewResolver> viewResolvers;
     private final ServerCodecConfigurer serverCodecConfigurer;

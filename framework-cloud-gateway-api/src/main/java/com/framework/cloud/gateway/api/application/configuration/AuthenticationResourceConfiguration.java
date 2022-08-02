@@ -1,7 +1,6 @@
 package com.framework.cloud.gateway.api.application.configuration;
 
 import com.framework.cloud.cache.cache.RedisCache;
-import com.framework.cloud.gateway.api.application.event.GatewayRefreshEventListener;
 import com.framework.cloud.gateway.domain.PermissionFeature;
 import com.framework.cloud.gateway.domain.authorization.AuthenticationBearerTokenConverter;
 import com.framework.cloud.gateway.domain.authorization.AuthenticationPermissionManager;
@@ -12,12 +11,7 @@ import com.framework.cloud.gateway.infrastructure.handler.AuthenticationSuccessH
 import com.framework.cloud.gateway.infrastructure.handler.AuthorizationAccessDeniedHandler;
 import com.framework.cloud.gateway.infrastructure.handler.AuthorizationEntryPointHandler;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.cloud.autoconfigure.RefreshAutoConfiguration;
-import org.springframework.cloud.context.refresh.ContextRefresher;
-import org.springframework.cloud.endpoint.event.RefreshEventListener;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
@@ -34,21 +28,23 @@ import org.springframework.security.web.server.authentication.ServerAuthenticati
 /**
  * @author wusiwei
  */
+@RefreshScope
 @AllArgsConstructor
 @EnableWebFluxSecurity
-@AutoConfigureAfter(RefreshAutoConfiguration.class)
-public class AuthenticationResourceConfiguration implements BeanPostProcessor {
+public class AuthenticationResourceConfiguration  {
 
     private final RedisCache redisCache;
     private final GatewayProperties gatewayProperties;
     private final PermissionFeature permissionFeature;
-    private final ContextRefresher contextRefresher;
     private final ResourceServerTokenServices resourceServerTokenServices;
 
     /**
-     * Http 过滤链
+     * HTTP authentication filter chain
+     *
+     * Gateway authentication filter path ignoredUrl is dynamically refreshed by {@link RefreshScope }
      */
     @Bean
+    @RefreshScope
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         String[] ignoredUrl = gatewayProperties.getIgnoredUrl();
         ServerAuthenticationConverter converter = new AuthenticationBearerTokenConverter(redisCache);
@@ -71,14 +67,6 @@ public class AuthenticationResourceConfiguration implements BeanPostProcessor {
         http.authorizeExchange().and().headers().frameOptions().disable();
         http.authorizeExchange().and().httpBasic().disable().csrf().disable();
         return http.build();
-    }
-
-    @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if (bean instanceof RefreshEventListener) {
-            bean = new GatewayRefreshEventListener(contextRefresher);
-        }
-        return bean;
     }
 
 }

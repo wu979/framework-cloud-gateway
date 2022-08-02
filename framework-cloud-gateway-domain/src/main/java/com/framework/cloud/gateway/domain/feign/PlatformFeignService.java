@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author wusiwei
  */
-@FeignClient(contextId = "PlatFormFeignService", value = "framework-cloud-platform-api", path = "/gateway-route", decode404 = true)
+@FeignClient(contextId = "PlatFormFeignService", value = "${client.platform}", path = "/gateway-route", decode404 = true)
 public interface PlatformFeignService {
 
     @ApiOperation(value = "动态路由列表")
