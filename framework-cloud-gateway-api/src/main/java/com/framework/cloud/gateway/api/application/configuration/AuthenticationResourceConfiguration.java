@@ -1,16 +1,23 @@
 package com.framework.cloud.gateway.api.application.configuration;
 
 import com.framework.cloud.cache.cache.RedisCache;
+import com.framework.cloud.gateway.api.application.event.GatewayRefreshEventListener;
 import com.framework.cloud.gateway.domain.PermissionFeature;
-import com.framework.cloud.gateway.domain.properties.GatewayProperties;
 import com.framework.cloud.gateway.domain.authorization.AuthenticationBearerTokenConverter;
 import com.framework.cloud.gateway.domain.authorization.AuthenticationPermissionManager;
 import com.framework.cloud.gateway.domain.authorization.AuthenticationReactiveManager;
+import com.framework.cloud.gateway.domain.properties.GatewayProperties;
 import com.framework.cloud.gateway.infrastructure.handler.AuthenticationFailureHandler;
 import com.framework.cloud.gateway.infrastructure.handler.AuthenticationSuccessHandler;
 import com.framework.cloud.gateway.infrastructure.handler.AuthorizationAccessDeniedHandler;
 import com.framework.cloud.gateway.infrastructure.handler.AuthorizationEntryPointHandler;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.cloud.autoconfigure.RefreshAutoConfiguration;
+import org.springframework.cloud.context.refresh.ContextRefresher;
+import org.springframework.cloud.endpoint.event.RefreshEventListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
@@ -29,11 +36,13 @@ import org.springframework.security.web.server.authentication.ServerAuthenticati
  */
 @AllArgsConstructor
 @EnableWebFluxSecurity
-public class AuthenticationResourceConfiguration {
+@AutoConfigureAfter(RefreshAutoConfiguration.class)
+public class AuthenticationResourceConfiguration implements BeanPostProcessor {
 
     private final RedisCache redisCache;
     private final GatewayProperties gatewayProperties;
     private final PermissionFeature permissionFeature;
+    private final ContextRefresher contextRefresher;
     private final ResourceServerTokenServices resourceServerTokenServices;
 
     /**
@@ -63,4 +72,13 @@ public class AuthenticationResourceConfiguration {
         http.authorizeExchange().and().httpBasic().disable().csrf().disable();
         return http.build();
     }
+
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        if (bean instanceof RefreshEventListener) {
+            bean = new GatewayRefreshEventListener(contextRefresher);
+        }
+        return bean;
+    }
+
 }

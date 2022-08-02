@@ -59,19 +59,19 @@ public class PermissionServiceImpl implements PermissionFeature {
         //所有权限
         List<PermissionModel> permissionList = redisCache.getAll(GatewayConstant.PERMISSION, PermissionModel.class);
         //当前路径权限
-        PermissionModel permissionModel = permissionList.stream().filter(permission -> matcher.match(permission.getPath(), url)).findFirst().orElse(null);
+        PermissionModel permissionModel = permissionList.stream().filter(permission -> matcher.match(url, permission.getPath())).findFirst().orElse(null);
         if (null == permissionModel) {
             return false;
         }
         //所有权限角色
-        List<RolePermissionModel> rolePermissionModel = hashOperations.get(GatewayConstant.ROUTES, userDetail.getTenantId());
+        List<RolePermissionModel> rolePermissionModel = hashOperations.get(GatewayConstant.PERMISSION_ROLE, userDetail.getTenantId());
         if (CollectionUtil.isEmpty(rolePermissionModel)) {
             return false;
         }
         //所有角色
         Set<String> roleCodes = rolePermissionModel.stream().filter(role -> permissionModel.getId().equals(role.getPermissionId())).map(RolePermissionModel::getCode).collect(Collectors.toSet());
         //交集 > 0 有此权限需要的 角色
-        return CollectionUtil.intersection(userRole, roleCodes).size() < 1;
+        return CollectionUtil.intersection(userRole, roleCodes).size() > 0;
 
     }
 }

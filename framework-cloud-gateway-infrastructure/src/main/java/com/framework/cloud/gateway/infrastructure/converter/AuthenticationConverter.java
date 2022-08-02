@@ -1,6 +1,5 @@
 package com.framework.cloud.gateway.infrastructure.converter;
 
-import cn.hutool.json.JSONObject;
 import com.framework.cloud.common.utils.FastJsonUtil;
 import com.framework.cloud.holder.constant.HeaderConstant;
 import com.framework.cloud.holder.constant.OauthConstant;
@@ -27,12 +26,12 @@ public class AuthenticationConverter extends DefaultUserAuthenticationConverter 
         Collection<? extends GrantedAuthority> authorities = this.getAuthorities(map);
         if (map.containsKey(OauthConstant.USER_DETAIL)) {
             Object principal = map.get(OauthConstant.USER_DETAIL);
-            LoginUser detail = new JSONObject(principal).toBean(LoginUser.class);
+            LoginUser detail = FastJsonUtil.toJavaObject(principal, LoginUser.class);
             return new UsernamePasswordAuthenticationToken(detail, OauthConstant.CREDENTIALS, authorities);
         } else {
             if (map.containsKey(HeaderConstant.X_USER_HEADER)) {
-                String userDetail = String.valueOf(map.get(HeaderConstant.X_USER_HEADER));
-                LoginUser loginUser = FastJsonUtil.toJavaObject(userDetail, LoginUser.class);
+                Object principal = map.get(HeaderConstant.X_USER_HEADER);
+                LoginUser loginUser = FastJsonUtil.toJavaObject(principal, LoginUser.class);
                 return new UsernamePasswordAuthenticationToken(loginUser, OauthConstant.CREDENTIALS, authorities);
             }
         }

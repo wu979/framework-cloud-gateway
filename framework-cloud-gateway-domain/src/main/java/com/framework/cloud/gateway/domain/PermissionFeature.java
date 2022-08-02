@@ -7,5 +7,8 @@ import org.springframework.security.core.Authentication;
  */
 public interface PermissionFeature {
 
+    /**
+     * 权限检查
+     */
     boolean hasPermission(Authentication authentication, String method, String url);
 }
