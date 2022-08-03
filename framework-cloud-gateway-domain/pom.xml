@@ -36,6 +36,11 @@
             <version>${core.framework.cloud.starter.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>stream-framework-cloud-starter</artifactId>
+            <version>${stream.framework.cloud.starter.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>

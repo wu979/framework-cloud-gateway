@@ -36,3 +36,4 @@ spring:
           - {"dataId" : application.yml, "group" : COMMON, "refresh" : true}
           - {"dataId" : feign.yml, "group" : COMMON, "refresh" : true}
           - {"dataId" : cache.yml, "group" : COMMON, "refresh" : true}
+          - {"dataId" : rabbit.yml, "group" : COMMON, "refresh" : true}
