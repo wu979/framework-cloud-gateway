@@ -30,6 +30,4 @@ public class GatewayRouteEvent implements DomainEvent {
     @ApiModelProperty(value = "排序")
     private Integer sort;
 
-    @ApiModelProperty(value = "新增、修改")
-    private Boolean saveOrUpdate;
 }

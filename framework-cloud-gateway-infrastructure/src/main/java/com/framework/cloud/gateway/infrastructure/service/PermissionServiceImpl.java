@@ -12,7 +12,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
 
@@ -45,20 +45,20 @@ public class PermissionServiceImpl implements PermissionFeature {
         if (authentication instanceof AnonymousAuthenticationToken) {
             return false;
         }
+        //登录用户
         LoginUser userDetail = (LoginUser) authentication.getPrincipal();
-        List<SimpleGrantedAuthority> authorities = (List<SimpleGrantedAuthority>) authentication.getAuthorities();
-        if (CollectionUtil.isEmpty(authorities)) {
+        //用户角色
+        Set<String> userRole = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
+        if (CollectionUtil.isEmpty(userRole)) {
             return false;
         }
-        //用户角色
-        Set<String> userRole = authorities.stream().map(SimpleGrantedAuthority::getAuthority).collect(Collectors.toSet());
         //超级管理员 不需认证
         if (userRole.contains(GlobalRoleType.ROLE_ADMIN.toString())) {
             return true;
         }
         //所有权限
         List<PermissionModel> permissionList = redisCache.getAll(GatewayConstant.PERMISSION, PermissionModel.class);
-        //当前路径权限
+        //匹配当前路径权限
         PermissionModel permissionModel = permissionList.stream().filter(permission -> matcher.match(url, permission.getPath())).findFirst().orElse(null);
         if (null == permissionModel) {
             return false;

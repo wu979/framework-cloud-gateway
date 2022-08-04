@@ -1,6 +1,5 @@
 package com.framework.cloud.gateway.domain.route;
 
-import com.alibaba.ttl.internal.javassist.NotFoundException;
 import com.framework.cloud.gateway.common.constant.GatewayConstant;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
@@ -44,9 +43,8 @@ public class CacheRouteDefinitionRepository implements RouteDefinitionRepository
         return routeId.flatMap(id -> {
             if (hashOperations.hasKey(GatewayConstant.ROUTES, id)) {
                 hashOperations.delete(GatewayConstant.ROUTES, id);
-                return Mono.empty();
             }
-            return Mono.defer(() -> Mono.error(new NotFoundException("路由文件没有找到: " + routeId)));
+            return Mono.empty();
         });
     }
 }

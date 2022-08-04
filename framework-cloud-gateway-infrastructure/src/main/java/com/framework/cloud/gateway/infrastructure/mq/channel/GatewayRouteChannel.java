@@ -11,8 +11,11 @@ import org.springframework.messaging.SubscribableChannel;
 public interface GatewayRouteChannel {
 
     String IN = "gateway-route-channel";
-
     @Input(IN)
     SubscribableChannel input();
 
+
+    String DELETE_IN = "gateway-route-delete-channel";
+    @Input(DELETE_IN)
+    SubscribableChannel deleteInput();
 }

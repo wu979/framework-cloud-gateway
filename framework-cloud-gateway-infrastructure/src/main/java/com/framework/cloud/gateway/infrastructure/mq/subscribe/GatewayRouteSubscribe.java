@@ -4,7 +4,7 @@ import com.framework.cloud.gateway.domain.event.GatewayRouteDeleteEvent;
 import com.framework.cloud.gateway.domain.event.GatewayRouteEvent;
 import com.framework.cloud.gateway.domain.utils.RouteDefinitionUtil;
 import com.framework.cloud.gateway.infrastructure.mq.channel.GatewayRouteChannel;
-import com.framework.cloud.gateway.infrastructure.mq.channel.GatewayRouteDeleteChannel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
 import org.springframework.cloud.gateway.route.RouteDefinition;
@@ -23,7 +23,8 @@ import javax.annotation.Resource;
  *
  * @author wusiwei
  */
-@EnableBinding({GatewayRouteChannel.class, GatewayRouteDeleteChannel.class})
+@Slf4j
+@EnableBinding(GatewayRouteChannel.class)
 public class GatewayRouteSubscribe implements ApplicationEventPublisherAware {
 
     private ApplicationEventPublisher publisher;
@@ -34,16 +35,16 @@ public class GatewayRouteSubscribe implements ApplicationEventPublisherAware {
 
     @StreamListener(GatewayRouteChannel.IN)
     public void gatewayRouteEvent(@Payload GatewayRouteEvent event) {
+        log.info("消费");
         RouteDefinition routeDefinition = RouteDefinitionUtil.buildRouteDefinition(event);
-        if (!event.getSaveOrUpdate()) {
-            routeDefinitionRepository.delete(Mono.just(routeDefinition.getId())).subscribe();
-        }
+        routeDefinitionRepository.delete(Mono.just(routeDefinition.getId())).subscribe();
         routeDefinitionRepository.save(Mono.just(routeDefinition)).subscribe();
         this.publisher.publishEvent(new RefreshRoutesEvent(this));
     }
 
-    @StreamListener(GatewayRouteDeleteChannel.IN)
+    @StreamListener(GatewayRouteChannel.DELETE_IN)
     public void gatewayRouteEvent(@Payload GatewayRouteDeleteEvent event) {
+        log.info("消费");
         routeDefinitionRepository.delete(Mono.just(event.getName())).subscribe();
         this.publisher.publishEvent(new RefreshRoutesEvent(this));
     }
