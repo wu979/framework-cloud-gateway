@@ -33,7 +33,7 @@ public class AuthenticationSuccessHandler implements ServerAuthenticationSuccess
         OAuth2Authentication oauth2Authentication = (OAuth2Authentication) authentication;
         OAuth2Request oAuth2Request = oauth2Authentication.getOAuth2Request();
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
-        LoginTenant loginTenant = new LoginTenant(loginUser.getId(), oAuth2Request.getClientId());
+        LoginTenant loginTenant = new LoginTenant(loginUser.getTenantId(), oAuth2Request.getClientId());
         header.add(HeaderConstant.X_USER_HEADER, Base64.encode(FastJsonUtil.toJSONString(loginUser)));
         header.add(HeaderConstant.X_TENANT_HEADER, Base64.encode(FastJsonUtil.toJSONString(loginTenant)));
         header.add(HeaderConstant.X_AUTHORITIES_HEADER, Base64.encode(CollectionUtil.join(authentication.getAuthorities(), ",")));
