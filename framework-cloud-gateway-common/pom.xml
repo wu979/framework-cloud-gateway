@@ -21,5 +21,10 @@
             <version>${common.framework.cloud.starter.version}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>enums-framework-cloud-starter</artifactId>
+            <version>${enums.framework.cloud.starter.version}</version>
+        </dependency>
     </dependencies>
 </project>
