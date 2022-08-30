@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- *
- *
  * @author wusiwei
  */
 @Getter

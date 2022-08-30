@@ -37,7 +37,7 @@ public class AuthenticationBearerTokenConverter implements ServerAuthenticationC
     @Override
     public Mono<Authentication> convert(ServerWebExchange exchange) {
         return Mono
-                .fromCallable(() ->  token(exchange.getRequest()) )
+                .fromCallable(() -> token(exchange.getRequest()))
                 .map((token) -> {
                     if (token.isEmpty()) {
                         BearerTokenError error = invalidTokenError();

@@ -32,7 +32,7 @@ public class RouteDefinitionUtil {
 
     private static RouteDefinition buildRouteDefinition(String path, String name, String predicates, String filters, Integer sort) {
         RouteDefinition definition = new RouteDefinition();
-        URI uri ;
+        URI uri;
         if (path.startsWith(HttpConstant.LB)) {
             uri = UriComponentsBuilder.fromUriString(path).build().toUri();
         } else {

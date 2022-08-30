@@ -31,7 +31,7 @@ import org.springframework.security.web.server.authentication.ServerAuthenticati
 @RefreshScope
 @AllArgsConstructor
 @EnableWebFluxSecurity
-public class AuthenticationResourceConfiguration  {
+public class AuthenticationResourceConfiguration {
 
     private final RedisCache redisCache;
     private final GatewayProperties gatewayProperties;
@@ -40,7 +40,7 @@ public class AuthenticationResourceConfiguration  {
 
     /**
      * HTTP authentication filter chain
-     *
+     * <p>
      * Gateway authentication filter path ignoredUrl is dynamically refreshed by {@link RefreshScope }
      */
     @Bean
