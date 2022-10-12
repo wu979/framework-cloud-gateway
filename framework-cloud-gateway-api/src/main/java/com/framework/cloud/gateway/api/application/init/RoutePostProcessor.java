@@ -2,7 +2,7 @@ package com.framework.cloud.gateway.api.application.init;
 
 import com.framework.cloud.cache.cache.RedisCache;
 import com.framework.cloud.common.result.Result;
-import com.framework.cloud.core.event.ApplicationInitializingEvent;
+import com.framework.cloud.event.application.ApplicationInitializingEvent;
 import com.framework.cloud.gateway.common.constant.GatewayConstant;
 import com.framework.cloud.gateway.common.rpc.vo.GatewayRouteListVO;
 import com.framework.cloud.gateway.domain.feign.PlatformFeignService;

@@ -24,6 +24,7 @@
         <core.framework.cloud.starter.version>1.0.0</core.framework.cloud.starter.version>
         <stream.framework.cloud.starter.version>1.0.0</stream.framework.cloud.starter.version>
         <enums.framework.cloud.starter.version>1.0.0</enums.framework.cloud.starter.version>
+        <event.framework.cloud.starter.version>1.0.0</event.framework.cloud.starter.version>
     </properties>
 
     <dependencyManagement>
