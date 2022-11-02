@@ -26,5 +26,10 @@
             <artifactId>enums-framework-cloud-starter</artifactId>
             <version>${enums.framework.cloud.starter.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.framework.cloud</groupId>
+            <artifactId>logging-framework-cloud-starter</artifactId>
+            <version>${logging.framework.cloud.starter.version}</version>
+        </dependency>
     </dependencies>
 </project>
