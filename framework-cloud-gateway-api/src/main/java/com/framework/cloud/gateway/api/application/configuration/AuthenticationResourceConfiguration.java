@@ -13,6 +13,7 @@ import com.framework.cloud.gateway.infrastructure.handler.AuthorizationEntryPoin
 import lombok.AllArgsConstructor;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -28,7 +29,6 @@ import org.springframework.security.web.server.authentication.ServerAuthenticati
 /**
  * @author wusiwei
  */
-@RefreshScope
 @AllArgsConstructor
 @EnableWebFluxSecurity
 public class AuthenticationResourceConfiguration {
@@ -44,7 +44,7 @@ public class AuthenticationResourceConfiguration {
      * Gateway authentication filter path ignoredUrl is dynamically refreshed by {@link RefreshScope }
      */
     @Bean
-    @RefreshScope
+    @RefreshScope(proxyMode = ScopedProxyMode.TARGET_CLASS)
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         String[] ignoredUrl = gatewayProperties.getIgnoredUrl();
         ServerAuthenticationConverter converter = new AuthenticationBearerTokenConverter(redisCache);
