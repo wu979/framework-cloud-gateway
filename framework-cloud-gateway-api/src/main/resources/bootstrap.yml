@@ -9,12 +9,12 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-        namespace: 198dda27-edd0-4fa6-8c50-983864062b8e
+        namespace: 0e5ea9ed-691f-4059-b8cc-bac9f1ddc816
         group: BASIC
         heart-beat-timeout: 20000
       config:
         server-addr: 127.0.0.1:8848
-        namespace: 198dda27-edd0-4fa6-8c50-983864062b8e
+        namespace: 0e5ea9ed-691f-4059-b8cc-bac9f1ddc816
         #指定名称
         name: framework-cloud-gateway
         #分组
