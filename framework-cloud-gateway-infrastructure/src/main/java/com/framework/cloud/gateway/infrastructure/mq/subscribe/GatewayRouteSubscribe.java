@@ -35,6 +35,7 @@ public class GatewayRouteSubscribe implements ApplicationEventPublisherAware {
 
     @StreamListener(GatewayRouteChannel.IN)
     public void gatewayRouteEvent(@Payload GatewayRouteEvent event) {
+        log.info("收到了新增事件");
         RouteDefinition routeDefinition = RouteDefinitionUtil.buildRouteDefinition(event);
         routeDefinitionRepository.delete(Mono.just(routeDefinition.getId())).subscribe();
         routeDefinitionRepository.save(Mono.just(routeDefinition)).subscribe();
@@ -43,6 +44,7 @@ public class GatewayRouteSubscribe implements ApplicationEventPublisherAware {
 
     @StreamListener(GatewayRouteChannel.DELETE_IN)
     public void gatewayRouteEvent(@Payload GatewayRouteDeleteEvent event) {
+        log.info("收到了删除事件");
         routeDefinitionRepository.delete(Mono.just(event.getName())).subscribe();
         this.publisher.publishEvent(new RefreshRoutesEvent(this));
     }
