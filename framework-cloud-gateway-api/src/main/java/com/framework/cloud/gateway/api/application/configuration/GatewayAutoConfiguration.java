@@ -4,6 +4,7 @@ import com.framework.cloud.gateway.domain.properties.GatewayProperties;
 import com.framework.cloud.gateway.infrastructure.filter.GatewayCorsFilter;
 import com.framework.cloud.gateway.infrastructure.filter.LoadBalancerFilter;
 import com.framework.cloud.gateway.infrastructure.filter.RequestBodyFilter;
+import com.framework.cloud.gateway.infrastructure.filter.TraceIdFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -37,5 +38,11 @@ public class GatewayAutoConfiguration {
     @ConditionalOnMissingBean(GatewayCorsFilter.class)
     public GatewayCorsFilter gatewayCorsFilter() {
         return new GatewayCorsFilter();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(TraceIdFilter.class)
+    public TraceIdFilter traceIdFilter() {
+        return new TraceIdFilter();
     }
 }
