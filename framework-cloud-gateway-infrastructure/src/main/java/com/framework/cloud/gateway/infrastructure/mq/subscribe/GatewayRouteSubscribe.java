@@ -4,6 +4,8 @@ import com.framework.cloud.gateway.domain.event.GatewayRouteDeleteEvent;
 import com.framework.cloud.gateway.domain.event.GatewayRouteEvent;
 import com.framework.cloud.gateway.domain.utils.RouteDefinitionUtil;
 import com.framework.cloud.gateway.infrastructure.mq.channel.GatewayRouteChannel;
+import com.framework.cloud.holder.UserContextHolder;
+import com.framework.cloud.holder.model.LoginUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
@@ -35,7 +37,8 @@ public class GatewayRouteSubscribe implements ApplicationEventPublisherAware {
 
     @StreamListener(GatewayRouteChannel.IN)
     public void gatewayRouteEvent(@Payload GatewayRouteEvent event) {
-        log.info("收到了新增事件");
+        LoginUser user = UserContextHolder.getInstance().getUser();
+        log.info("收到了新增事件,用户: {}", user);
         RouteDefinition routeDefinition = RouteDefinitionUtil.buildRouteDefinition(event);
         routeDefinitionRepository.delete(Mono.just(routeDefinition.getId())).subscribe();
         routeDefinitionRepository.save(Mono.just(routeDefinition)).subscribe();
@@ -44,7 +47,8 @@ public class GatewayRouteSubscribe implements ApplicationEventPublisherAware {
 
     @StreamListener(GatewayRouteChannel.DELETE_IN)
     public void gatewayRouteEvent(@Payload GatewayRouteDeleteEvent event) {
-        log.info("收到了删除事件");
+        LoginUser user = UserContextHolder.getInstance().getUser();
+        log.info("收到了删除事件,用户: {}", user);
         routeDefinitionRepository.delete(Mono.just(event.getName())).subscribe();
         this.publisher.publishEvent(new RefreshRoutesEvent(this));
     }
